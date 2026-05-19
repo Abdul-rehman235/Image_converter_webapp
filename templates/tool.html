@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Format Converter</title>
+    <link rel="stylesheet" href="/static/tool.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">Convert<span>Craft</span></div>
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Tool Section -->
+    <main class="container">
+        
+        <!-- CARD 1: File Converter Upload Section -->
+        <section class="converter-section">
+            <h1 class="main-title">File Converter</h1>
+            <p class="subtitle">Convert your images to PNG, JPG, WebP, or AVIF instantly.</p>
+
+            <!-- Upload Box Wrapper Form -->
+            <form action="/" method="POST" enctype="multipart/form-data" class="upload-container">
+                
+                <!-- Drop Zone -->
+                <div class="drop-zone">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <br><br>
+                    <input type="file" name="my_photo" accept="image/*" required>
+                    <br><br>
+                </div>
+
+                <!-- Convert Options Actions -->
+                <div class="converter-actions">
+                    <div class="format-select">
+                        <label for="format">Convert to:</label>
+                        <input type="text" id="format" name="format" placeholder="e.g. png, jpg, webp, avif" required>   
+                    </div>
+                    <button type="submit" class="btn-convert">Convert Image</button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- CARD 2: Image Download Section (Stacked directly below the upload section) -->
+        {% if user_photo %}
+        <section class="card download-card" style="background: #ffffff; border-radius: 14px; padding: 35px; border: 1px solid #e2e8f0; margin-top: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <div class="success-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                <div class="success-icon" style="background-color: #e6f4ea; color: #10b981; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">✓</div>
+                <div>
+                    <h2 style="font-size: 1.35rem; font-weight: 700;">Conversion Complete!</h2>
+                    <p style="color: #64748b; font-size: 0.95rem;">Your file is ready for download.</p>
+                </div>
+            </div>
+
+            <!-- Image Preview Box -->
+            <div class="preview-box" style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 15px; background: #fafafa; display: flex; justify-content: center; align-items: center; margin-bottom: 25px;">
+                <img src="{{ user_photo }}" alt="Processed Image" style="max-width: 100%; max-height: 250px; border-radius: 6px; object-fit: contain;">
+            </div>
+
+            <!-- Download Action Button -->
+            <div class="download-actions" style="display: flex;">
+                <a href="{{ user_photo }}" 
+                   download="converted_image" 
+                   class="btn-download" 
+                   style="text-decoration: none; background-color: #10b981; color: white; text-align: center; width: 100%; padding: 14px; border-radius: 8px; font-weight: 600; font-size: 1rem; transition: background-color 0.2s;">
+                    Download Converted Image
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <hr class="divider">
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="benefits-section">
+            <h2 class="section-title">Why Use Our Converter?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Blazing Fast</h3>
+                    <p>Convert your images in a matter of seconds directly inside your browser window.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="card-icon">🔒</div>
+                    <h3>100% Secure</h3>
+                    <p>Your files never leave your device. All processing happens locally for maximum privacy.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="card-icon">💎</div>
+                    <h3>High Quality</h3>
+                    <p>Maintain maximum visual fidelity while reducing file sizes efficiently.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2026 ConvertCraft. Powered by AZ.Studio.</p>
+    </footer>
+
+</body>
+</html>

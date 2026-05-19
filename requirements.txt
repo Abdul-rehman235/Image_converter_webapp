@@ -1,0 +1,5 @@
+Flask
+Pillow
+gunicorn
+base64
+io
