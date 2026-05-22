@@ -111,6 +111,37 @@ body {
     border-color: var(--primary);
 }
 
+.btn-signup {
+    background: #4f46e5; /* Bright Neo-Green Accent */
+    color: #0b0b0c; /* Deep dark text for extreme contrast */
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15); /* Soft neon glow */
+}
+
+.btn-signup:hover {
+    background: #4f46e5; /* Slightly deeper green on hover */
+    border-color: #4f46e5;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 255, 102, 0.35); /* Increased neon glow */
+}
+
+.btn-login:active, .btn-signup:active {
+    transform: translateY(1px); /* Slight press-down simulation */
+    box-shadow: none;
+}
+
+.btn-login, .btn-signup {
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    border-radius: 8px; /* Modern sleek rounded corners, not full pill shape */
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Ultra smooth ease */
+    position: relative;
+    overflow: hidden;
+}
+
 .upload-icon {
     width: 48px;
     height: 48px;

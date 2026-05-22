@@ -40,6 +40,11 @@ def tool():
     return render_template('tool.html', user_photo=encoded_image)
 
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
