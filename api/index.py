@@ -2,15 +2,22 @@ import base64, io
 
 from flask import Flask, render_template, request, redirect, url_for, session
 from PIL import Image
-
-
 import os
+
+
 
 # Flask ko batana ke templates aur static folders bahar root par hain
 app = Flask(__name__, 
             template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates')),
             static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../static')))
 
+app.secret_key = "my_secret_key"
+
+user_data = {
+    "email": [],
+    "username": [],
+    "password": []
+}
 
 @app.route('/', methods=['GET', 'POST'])
 def tool():
@@ -40,13 +47,38 @@ def tool():
     return render_template('tool.html', user_photo=encoded_image)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username in user_data['username'] and password in user_data['password']:
+            # session['user'] = username
+            # session['pass'] = password
+            return redirect('/')
+        else:
+            return redirect(url_for('signup'))
+        
     return render_template('login.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        session['user'] = username
+        session['email'] = email
+        if email not in user_data['email'] and password == password:
+            user_data['username'].append(username)
+            user_data['email'].append(email)
+            user_data['password'].append(password)
+            return redirect('/')
+        else:
+            return redirect(url_for('login'))
+    
     return render_template('signup.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
