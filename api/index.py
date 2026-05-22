@@ -69,7 +69,7 @@ def signup():
         password = request.form.get('password')
         session['user'] = username
         session['email'] = email
-        if email not in user_data['email'] and password == password:
+        if email not in user_data['email']:
             user_data['username'].append(username)
             user_data['email'].append(email)
             user_data['password'].append(password)
