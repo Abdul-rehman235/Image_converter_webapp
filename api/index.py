@@ -28,8 +28,6 @@ def tool():
         file = request.files.get('my_photo')
         ext = request.form.get('format')
         
-
-        
         if file and file.filename != '':
             # 2. Pillow library se image ko open kiya (Processing)
             img = Image.open(file.stream)
@@ -51,14 +49,12 @@ def tool():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    user = None
-
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
         if username in user_data['username'] and password in user_data['password']:
-            session['user'] = username
-            session['pass'] = password
+            # session['user'] = username
+            # session['pass'] = password
             return redirect('/')
         else:
             return redirect(url_for('signup'))
@@ -72,7 +68,7 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         session['user'] = username
-        session['password'] = password
+        session['email'] = email
         if email not in user_data['email']:
             user_data['username'].append(username)
             user_data['email'].append(email)
