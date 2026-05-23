@@ -267,3 +267,90 @@ body {
 
 
 
+/* Container position fix karne ke liye */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Profile Button (Bilkul signup button ke style par) */
+.btn-profile {
+    background: #007BFF; /* Aapka brand accent color */
+    color: #141416;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-profile:hover {
+    background: #007BFF;
+}
+
+/* Small Dropdown Card */
+.profile-card-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 200px;
+    background: #141416; /* Clean dark background */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+/* User Info Styling */
+.card-user-info {
+    margin-bottom: 8px;
+}
+
+.card-username {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+.card-email {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    margin: 0;
+    word-break: break-all;
+}
+
+/* Divider Line */
+.card-divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+}
+
+/* Logout Button Inside Card */
+.card-logout-btn {
+    display: block;
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.card-logout-btn:hover {
+    background: rgba(255, 77, 77, 0.1);
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+

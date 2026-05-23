@@ -28,6 +28,12 @@ def tool():
     user_ip = request.remote_addr
     user = user_ip in user_data['user_ip']
     username = session.get('user') if user else None
+    email = session.get('email') if user else None
+    logout = request.form.get('logout')
+    if user and logout:
+        session.clear()
+        return redirect('login')
+
     if request.method == 'POST':
         # 1. HTML se photo received ki (using input's name attribute)
         file = request.files.get('my_photo')
@@ -49,7 +55,7 @@ def tool():
             encoded_image = f"data:image/{ext};base64,{b64_string}"            
 
             
-    return render_template('tool.html', user_photo=encoded_image, user_ip=user_ip, user=user, username=username)
+    return render_template('tool.html', user_photo=encoded_image, user_ip=user_ip, user=user, username=username, email=email)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -76,6 +82,7 @@ def signup():
         session['user'] = username
         session['email'] = email
         session['user_ip'] = user_ip
+        session['pass'] = password
         if email not in user_data['email']:
             user_data['username'].append(username)
             user_data['email'].append(email)
