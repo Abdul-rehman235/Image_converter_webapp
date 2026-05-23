@@ -29,10 +29,7 @@ def tool():
     user = user_ip in user_data['user_ip']
     username = session.get('user') if user else None
     email = session.get('email') if user else None
-    logout = request.form.get('logout')
-    if user and logout:
-        session.clear()
-        return redirect('login')
+
 
     if request.method == 'POST':
         # 1. HTML se photo received ki (using input's name attribute)
