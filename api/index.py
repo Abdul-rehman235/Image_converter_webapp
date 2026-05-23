@@ -14,6 +14,7 @@ app = Flask(__name__,
 app.secret_key = "my_secret_key"
 
 user_data = {
+    "user_ip": [],
     "email": [],
     "username": [],
     "password": []
@@ -22,12 +23,16 @@ user_data = {
 @app.route('/', methods=['GET', 'POST'])
 def tool():
     encoded_image = None  # Yeh HTML ko pass hoga
+    user = None
 
+    user_ip = request.remote_addr
+    user = user_ip in user_data['user_ip']
+    username = session.get('user') if user else None
     if request.method == 'POST':
         # 1. HTML se photo received ki (using input's name attribute)
         file = request.files.get('my_photo')
         ext = request.form.get('format')
-        
+
         if file and file.filename != '':
             # 2. Pillow library se image ko open kiya (Processing)
             img = Image.open(file.stream)
@@ -44,7 +49,7 @@ def tool():
             encoded_image = f"data:image/{ext};base64,{b64_string}"            
 
             
-    return render_template('tool.html', user_photo=encoded_image)
+    return render_template('tool.html', user_photo=encoded_image, user_ip=user_ip, user=user, username=username)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -67,12 +72,15 @@ def signup():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
+        user_ip = request.remote_addr
         session['user'] = username
         session['email'] = email
+        session['user_ip'] = user_ip
         if email not in user_data['email']:
             user_data['username'].append(username)
             user_data['email'].append(email)
             user_data['password'].append(password)
+            user_data['user_ip'].append(user_ip)
             return redirect('/')
         else:
             return redirect(url_for('login'))
