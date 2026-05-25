@@ -130,16 +130,32 @@ body {
     box-shadow: none;
 }
 
+/* 1. Buttons ke parent container ko aamne-saamne (inline) rakhne ke liye */
+/* (Tasalli kar lein ke aapke HTML mein buttons jis div mein hain uski class yahan .auth-buttons ho) */
+.auth-buttons {
+    display: flex !important;
+    flex-direction: row !important; /* Buttons ko hamesha ek hi line mein rakhega */
+    align-items: center;
+    gap: 4px !important; /* 🔥 Fasla bohot kam kar diya taaki dono kareeb aa jayein */
+}
+
 .btn-login, .btn-signup {
-    padding: 10px 22px;
-    font-size: 14px;
+    padding: 6px 12px;   /* Width aur height dono mazeed decrease kar di */
+    font-size: 13px;     /* Sleek aur compact font size */
     font-weight: 600;
-    font-family: inherit;
-    border-radius: 8px; /* Modern sleek rounded corners, not full pill shape */
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Ultra smooth ease */
-    position: relative;
-    overflow: hidden;
+    border-radius: 6px;
+    white-space: nowrap; /* Text ko line todne nahi dega */
+}
+
+/* 📱 Mobile Par Mazeed Fitting Ke Liye */
+@media screen and (max-width: 480px) {
+    .auth-buttons {
+        gap: 3px !important; /* Mobile par fasla bilkul minimal ho jayega */
+    }
+    .btn-login, .btn-signup {
+        padding: 5px 10px;   /* Mobile screen par buttons thode aur chote ho jayenge */
+        font-size: 12px;
+    }
 }
 
 .upload-icon {
