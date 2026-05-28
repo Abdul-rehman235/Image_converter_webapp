@@ -88,29 +88,51 @@
 
         <!-- CARD 2: Image Download Section (Stacked directly below the upload section) -->
         {% if user_photo %}
-        <section class="card download-card" style="background: #ffffff; border-radius: 14px; padding: 35px; border: 1px solid #e2e8f0; margin-top: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-            <div class="success-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                <div class="success-icon" style="background-color: #e6f4ea; color: #10b981; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">✓</div>
-                <div>
-                    <h2 style="font-size: 1.35rem; font-weight: 700;">Conversion Complete!</h2>
-                    <p style="color: #64748b; font-size: 0.95rem;">Your file is ready for download.</p>
+                <style>
+            @media screen and (max-width: 768px) {
+                .responsive-row-card {
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    text-align: center !important;
+                    padding: 20px !important;
+                    gap: 15px !important;
+                }
+                .responsive-row-card .success-header {
+                    flex-direction: column !important;
+                    text-align: center !important;
+                }
+                .responsive-row-card .download-actions {
+                    width: 100% !important;
+                }
+                .responsive-row-card .btn-download {
+                    width: 100% !important;
+                }
+            }
+        </style>
+        
+        <section class="card download-card responsive-row-card" style="background: #ffffff; border-radius: 14px; padding: 15px 25px; border: 1px solid #e2e8f0; margin-top: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            
+            <div class="preview-box" style="border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px; background: #fafafa; display: flex; justify-content: center; align-items: center; width: 70px; height: 70px; flex-shrink: 0;">
+                <img src="{{ user_photo }}" alt="Processed Image" style="max-width: 100%; max-height: 100%; border-radius: 4px; object-fit: contain;">
+            </div>
+        
+            <div class="success-header" style="display: flex; align-items: center; gap: 12px; flex-grow: 1;">
+                <div class="success-icon" style="background-color: #e6f4ea; color: #10b981; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;">✓</div>
+                <div style="text-align: left;">
+                    <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; line-height: 1.2;">Conversion Complete!</h2>
+                    <p style="color: #64748b; font-size: 0.85rem; margin: 2px 0 0 0; line-height: 1.2;">Your file is ready for download.</p>
                 </div>
             </div>
-
-            <!-- Image Preview Box -->
-            <div class="preview-box" style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 15px; background: #fafafa; display: flex; justify-content: center; align-items: center; margin-bottom: 25px;">
-                <img src="{{ user_photo }}" alt="Processed Image" style="max-width: 100%; max-height: 250px; border-radius: 6px; object-fit: contain;">
-            </div>
-
-            <!-- Download Action Button -->
-            <div class="download-actions" style="display: flex;">
+        
+            <div class="download-actions" style="display: flex; flex-shrink: 0;">
                 <a href="{{ user_photo }}" 
                    download="converted_image" 
                    class="btn-download" 
-                   style="text-decoration: none; background-color: #10b981; color: white; text-align: center; width: 100%; padding: 14px; border-radius: 8px; font-weight: 600; font-size: 1rem; transition: background-color 0.2s;">
-                    Download Converted Image
+                   style="text-decoration: none; background-color: #10b981; color: white; text-align: center; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s; white-space: nowrap; display: inline-block;">
+                    Download Image
                 </a>
             </div>
+        
         </section>
         {% endif %}
 
