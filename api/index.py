@@ -20,7 +20,21 @@ user_data = {
     "password": []
 }
 
+
+
 @app.route('/', methods=['GET', 'POST'])
+def home():
+    user = None
+
+    user_ip = request.remote_addr
+    user = user_ip in user_data['user_ip']
+    username = session.get('user') if user else None
+    email = session.get('email') if user else None
+
+
+    return render_template('index.html', user=user, username=username, email=email)
+
+@app.route('/tool', methods=['GET', 'POST'])
 def tool():
     encoded_image = None  # Yeh HTML ko pass hoga
     user = None
