@@ -312,6 +312,18 @@ body {
     margin-bottom: 2rem;
 }
 
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 25px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
 /* --- Clean Responsive Styling --- */
 @media (max-width: 768px) {
     .nav-links {
