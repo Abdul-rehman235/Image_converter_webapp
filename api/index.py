@@ -34,6 +34,7 @@ def home():
 
     return render_template('index.html', user=user, username=username, email=email)
 
+# this tool route
 @app.route('/tool', methods=['GET', 'POST'])
 def tool():
     encoded_image = None  # Yeh HTML ko pass hoga
@@ -67,6 +68,7 @@ def tool():
 
             
     return render_template('tool.html', user_photo=encoded_image, user_ip=user_ip, user=user, username=username, email=email)
+
 
 
 @app.route('/compressor', methods=['GET', 'POST'])
