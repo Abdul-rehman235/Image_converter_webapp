@@ -69,6 +69,27 @@ def tool():
     return render_template('tool.html', user_photo=encoded_image, user_ip=user_ip, user=user, username=username, email=email)
 
 
+@app.route('/compressor', methods=['GET', 'POST'])
+def compressor():
+    encoded_image = None  # Yeh HTML ko pass hoga
+
+
+    if request.method == 'POST':
+        quality = request.form.get('quality')
+        file = request.files.get('my_photo')
+
+        img = Image.open(file.stream)
+
+        buffer = io.BytesIO()
+        img.save(buffer, format='JPEG', quality=int(quality), optimize=True)
+        b64_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # Data URL format jo HTML ka <img> tag samajhta hai
+        encoded_image = f"data:image/{file.filename};base64,{b64_string}"
+
+    return render_template('compressor.html', compressed_photo=encoded_image)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
