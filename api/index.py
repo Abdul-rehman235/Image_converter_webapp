@@ -85,15 +85,16 @@ def compressor():
     if request.method == 'POST':
         quality = request.form.get('quality')
         file = request.files.get('my_photo')
+        format = file.filename.split('.')[-1].lower()
 
         img = Image.open(file.stream)
 
         buffer = io.BytesIO()
-        img.save(buffer, format='JPEG', quality=int(quality), optimize=True)
+        img.save(buffer, format=format.upper() if format in ['png', 'jpg', 'webp', 'avif'] else 'PNG', quality=int(quality), optimize=True)
         b64_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
         
         # Data URL format jo HTML ka <img> tag samajhta hai
-        encoded_image = f"data:image/{file.filename};base64,{b64_string}"
+        encoded_image = f"data:image/{format};base64,{b64_string}"
 
     return render_template('compressor.html', compressed_photo=encoded_image, user=user, username=username, email=email)
 

@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConvertCraft - Size Compressor</title>
+    <title>PicCraft - Size Compressor</title>
     <link rel="stylesheet" href="/static/compressor.css">
 </head>
 <body>
 
     <header class="navbar">
         <div class="nav-container">
-        <a href="/" class="logo">Pic<span>Craft</span></a>
-        <nav class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">Tools</a>
-            <a href="#">API</a>
-            <a href="#">Pricing</a>
-        </nav>
-        {% if user %}
-            <div class="profile-container">
+            <a href="/" class="logo">Pic<span>Craft</span></a>
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Tools</a>
+                <a href="#">API</a>
+                <a href="#">Pricing</a>
+            </nav>
+            
+            {% if user %}
+                <div class="profile-container">
                     <button class="btn-profile" onclick="toggleProfileDropdown()">Profile</button>
-                
                     <div id="profileDropdownCard" class="profile-card-dropdown hidden">
                         <div class="card-user-info">
                             <p class="card-username">{{ username }}</p>
@@ -29,7 +29,7 @@
                         <hr class="card-divider">
                         <a href="/login" class="card-logout-btn">Logout</a>
                     </div>
-                   </div>
+                </div>
 
                 <script>
                     function toggleProfileDropdown() {
@@ -37,7 +37,6 @@
                         dropdown.classList.toggle('hidden');
                     }
                 
-                    // Agar user card ke bahar kahin bhi click kare toh dropdown close ho jaye
                     window.addEventListener('click', function(e) {
                         const button = document.querySelector('.btn-profile');
                         const dropdown = document.getElementById('profileDropdownCard');
@@ -45,50 +44,49 @@
                             dropdown.classList.add('hidden');
                         }
                     });
-            </script>
-        {% else %}
-
+                </script>
+            {% else %}
                 <a href="/login" class="btn-primary-link">
-                <button type="button" class="btn-primary">Get Started</button>
-            </a>
+                    <button type="button" class="btn-primary">Get Started</button>
+                </a>
             {% endif %}
-            </div>
-        </form>
+        </div>
     </header>
     
-
-    <main class="dashboard-container" style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <main class="dashboard-container" style="max-width: 780px; margin: 50px auto; padding: 0 20px;">
         
-        <section class="converter-section" style="margin-bottom: 30px; text-align: left;">
-            <h1 class="main-title">Size Compressor</h1>
-            <p class="subtitle">Reduce asset payloads instantly with optimized matrix balance.</p>
+        <section class="converter-section" style="margin-bottom: 35px; text-align: left;">
+            <h1 class="main-title" style="color: #ffffff; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.8px; margin: 0 0 8px 0; line-height: 1.15;">Size Compressor</h1>
+            <p class="subtitle" style="color: #94a3b8; font-size: 1rem; font-weight: 400; line-height: 1.5; margin: 0; max-width: 600px;">Reduce image weight instantly while ensuring optimal matrix resolution and high fidelity balancing.</p>
         </section>
 
-        <form action="/compressor" method="POST" enctype="multipart/form-data" class="upload-form" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+        <form action="/compressor" method="POST" enctype="multipart/form-data" class="upload-form" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);">
             
-            <div class="responsive-form-group" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px;">
-                <label for="quality" style="color: #1e293b; font-weight: 600; font-size: 0.95rem; white-space: nowrap;">Target Quality Level:</label>
+            <div class="responsive-form-group" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 18px; margin-bottom: 18px;">
+                <label for="quality" style="color: #1e293b; font-weight: 600; font-size: 0.92rem; white-space: nowrap;">Target Quality Level:</label>
                 
-                <div style="display: flex; align-items: center; gap: 12px; width: 100%; max-width: 320px; background: #f8fafc; padding: 8px 14px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <div class="range-wrapper" style="display: flex; align-items: center; gap: 12px; width: 100%; max-width: 280px; background: #f8fafc; padding: 8px 14px; border-radius: 8px; border: 1px solid #e2e8f0;">
                     <input type="range" id="quality" name="quality" min="10" max="90" value="70" 
                            oninput="this.nextElementSibling.value = this.value + '%'"
                            style="flex-grow: 1; accent-color: #10b981; cursor: pointer; height: 6px;">
-                    <output style="color: #0f172a; font-weight: 700; font-size: 0.9rem; min-width: 35px; text-align: right;">70%</output>
+                    <output style="color: #0f172a; font-weight: 700; font-size: 0.88rem; min-width: 35px; text-align: right;">70%</output>
                 </div>
             </div>
 
-            <div style="position: relative; margin-bottom: 24px; border: 2px dashed #cbd5e1; padding: 40px 20px; border-radius: 12px; text-align: center; background: #f8fafc; transition: border-color 0.2s ease;" onmouseover="this.style.borderColor='#10b981'" onmouseout="this.style.borderColor='#cbd5e1'">
-                <div style="color: #10b981; margin-bottom: 10px;">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block;">
+        
+                
+            <div class="dropzone-container" style="position: relative; margin-bottom: 24px; border: 2px dashed #cbd5e1; padding: 35px 20px; border-radius: 12px; text-align: center; background: #f8fafc; transition: all 0.2s ease;">
+                <div style="color: #10b981; margin-bottom: 12px;">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block;">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
                     </svg>
                 </div>
                 <input type="file" name="my_photo" required style="color: #475569; font-size: 0.9rem; font-weight: 500; cursor: pointer; max-width: 250px;">
-                <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 6px;">Matrix compatibility: JPEG, PNG, or WebP up to 10MB</p>
+                <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 8px; margin-bottom: 0;">Compatibility Matrix: JPEG, PNG, or WebP up to 10MB</p>
             </div>
 
-            <div style="display: flex; justify-content: flex-end;">
-                <button type="submit" class="btn-download" style="padding: 12px 28px; font-size: 0.92rem; border-radius: 8px; border: none; width: auto; min-width: 160px;">
+            <div class="submit-wrapper" style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn-download" style="padding: 11px 26px; font-size: 0.9rem; border-radius: 8px; border: none; width: auto; min-width: 160px; cursor: pointer;">
                     Compress Asset
                 </button>
             </div>
@@ -118,9 +116,7 @@
         </section>
         {% endif %}
     </main>
-
      
-    <!-- Footer -->
     <footer class="main-footer">
         <p>&copy; 2026 PicCraft. Powered by AZ.Studio.</p>
     </footer>

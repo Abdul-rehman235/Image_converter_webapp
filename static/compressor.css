@@ -107,11 +107,122 @@
     opacity: 0.9;
 }
 
-
 /* --- Converter Section --- */
 .converter-section {
     text-align: center;
     padding: 60px 0 40px 0;
+}
+
+/* --- Modern Format Input Group Wrapper --- */
+.format-select-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* --- Label Typography Layout --- */
+.input-label-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-label-wrapper label {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0;
+    letter-spacing: -0.2px;
+}
+
+.input-label-wrapper .input-hint {
+    color: #94a3b8;
+    font-size: 0.78rem;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+/* --- Input Field Interactive Box Architecture --- */
+.input-field-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+}
+
+/* Left side contextual indicator SVG icon */
+.input-icon-node {
+    position: absolute;
+    left: 14px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+/* Premium Text Field Core Canvas */
+.input-field-container input[type="text"] {
+    width: 100%;
+    padding: 11px 16px 11px 42px; /* Extra left padding to safely clear the vector icon */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #0f172a;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
+}
+
+/* --- Interactive Reactive States --- */
+.input-field-container input[type="text"]::placeholder {
+    color: #cbd5e1;
+    font-weight: 400;
+}
+
+/* Hover State */
+.input-field-container input[type="text"]:hover {
+    border-color: #cbd5e1;
+    background-color: #f1f5f9;
+}
+
+/* Ultra Smooth Green Glow Focus State */
+.input-field-container input[type="text"]:focus {
+    border-color: #10b981;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Shift icon color contextually when user selects the box */
+.input-field-container input[type="text"]:focus ~ .input-icon-node,
+.input-field-container:focus-within .input-icon-node {
+    color: #10b981;
+}
+
+/* ==========================================================================
+   📱 MOBILE OVERRIDE BREAKPOINT (STAYS 100% RESPONSIVE)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .format-select-group {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        padding-bottom: 16px !important;
+    }
+
+    .input-field-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 
 .main-title {
