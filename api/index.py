@@ -74,6 +74,12 @@ def tool():
 @app.route('/compressor', methods=['GET', 'POST'])
 def compressor():
     encoded_image = None  # Yeh HTML ko pass hoga
+    user = None
+
+    user_ip = request.remote_addr
+    user = user_ip in user_data['user_ip']
+    username = session.get('user') if user else None
+    email = session.get('email') if user else None
 
 
     if request.method == 'POST':
@@ -89,7 +95,7 @@ def compressor():
         # Data URL format jo HTML ka <img> tag samajhta hai
         encoded_image = f"data:image/{file.filename};base64,{b64_string}"
 
-    return render_template('compressor.html', compressed_photo=encoded_image)
+    return render_template('compressor.html', compressed_photo=encoded_image, user=user, username=username, email=email)
 
 
 @app.route('/login', methods=['GET', 'POST'])
