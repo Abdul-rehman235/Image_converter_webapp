@@ -1,9 +1,24 @@
-/* --- Header Layout --- */
+/* ==========================================================================
+   🧱 GLOBAL CONFIGURATIONS & ROOT SYSTEM
+   ========================================================================== */
+:root {
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+    --accent: #10b981; /* ConvertCraft Neon Emerald */
+    --brand-blue: #007BFF;
+}
+
+/* ==========================================================================
+   🧭 NAVBAR / HEADER LAYOUT (FULLY RESPONSIVE)
+   ========================================================================== */
 .navbar {
     position: sticky;
     top: 0;
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 100;
 }
@@ -11,14 +26,14 @@
 .nav-container {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 1.25rem 2rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     text-decoration: none;
     color: var(--text-main);
@@ -29,11 +44,16 @@
     color: var(--accent);
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
     text-decoration: none;
     color: var(--text-muted);
     font-weight: 500;
-    margin: 0 1.5rem;
+    margin: 0 1.2rem;
     transition: color 0.2s ease;
 }
 
@@ -41,7 +61,9 @@
     color: var(--text-main);
 }
 
-/* --- Buttons --- */
+/* ==========================================================================
+   🔘 BUTTONS SYSTEM
+   ========================================================================== */
 .btn-primary {
     background-color: #141416;
     color: #fff;
@@ -54,10 +76,10 @@
 }
 
 .btn-primary:hover {
-    background-color: #007BFF;
+    background-color: var(--brand-blue);
 }
 
-/* Container position fix karne ke liye */
+/* Profile Dropdown Parent Wrapper */
 .profile-container {
     position: relative;
     display: inline-block;
@@ -67,41 +89,40 @@
     display: none !important;
 }
 
-/* Profile Button (Bilkul signup button ke style par) */
+/* Profile Trigger Controller */
 .btn-profile {
-    background: #007BFF; /* Aapka brand accent color */
-    color: #141416;
+    background: var(--brand-blue);
+    color: #ffffff; /* White text on blue looks highly professional */
     border: none;
-    padding: 10px 20px;
+    padding: 8px 18px;
     font-size: 14px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: opacity 0.2s ease;
 }
 
 .btn-profile:hover {
-    background: #007BFF;
+    opacity: 0.9;
 }
 
-/* Small Dropdown Card */
+/* Small Dropdown Context Window */
 .profile-card-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    width: 200px;
-    background: #141416; /* Clean dark background */
+    width: 220px;
+    background: #141416;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-    padding: 12px;
+    padding: 14px;
     box-sizing: border-box;
 }
 
-/* User Info Styling */
 .card-user-info {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .card-username {
@@ -118,14 +139,97 @@
     word-break: break-all;
 }
 
-/* --- Optimized Mobile Layout Constraints for Compression Output --- */
+/* ==========================================================================
+   🗜️ FORMS & RANGE INPUT SLIDER ELEMENTS
+   ========================================================================== */
+.responsive-form-group input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+}
+
+/* .responsive-form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16 height: 16px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(16, 185, 129, 0.4);
+} */
+
+/* ==========================================================================
+   🏛️ FOOTER BLOCK
+   ========================================================================== */
+.main-footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 25px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   📱 📱 CORE MEDIA QUERIES BREAKPOINTS (TABLET & MOBILE)
+   ========================================================================== */
+
 @media screen and (max-width: 768px) {
+    /* 1. Header Break System */
+    .nav-container {
+        padding: 1rem;
+    }
+    .nav-links a:not(.btn-profile):not(.btn-primary) {
+        display: none; /* Hide normal links to save tight spaces */
+    }
+
+    /* 2. Container Canvas Control */
+    .dashboard-container {
+        padding: 0 15px !important;
+    }
+
+    /* 3. Core Form Console Formats */
+    .upload-form {
+        padding: 20px !important;
+    }
+    
+    .upload-form .responsive-form-group {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        padding-bottom: 12px !important;
+    }
+    
+    /* Input adjustments for elements inside row */
+    .upload-form .responsive-form-group div,
+    .upload-form .responsive-form-group input,
+    .upload-form .responsive-form-group select {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Button Center Fix */
+    .upload-form div[style*="justify-content: flex-end"] {
+        justify-content: center !important;
+    }
+    
+    .upload-form .btn-download {
+        width: 100% !important;
+    }
+
+    /* 4. Downloader Card Logic Stack */
     .responsive-row-card {
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
         padding: 20px 16px !important;
-        gap: 14px !important;
+        gap: 16px !important;
     }
     
     .responsive-row-card .success-header {
@@ -143,39 +247,6 @@
     }
 }
 
-/* --- Adjust Element: Range Slider Reset for Forms --- */
-.responsive-form-group input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #e2e8f0;
-    border-radius: 4px;
-    outline: none;
-}
-
-.responsive-form-group input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #10b981;
-    cursor: pointer;
-    box-shadow: 0 1px 4px rgba(16, 185, 129, 0.4);
-}
-
-
-/* --- Footer --- */
-.main-footer {
-    background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
-    padding: 25px 0;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: auto;
-}
-
-/* --- Responsive Adjustments --- */
 @media (max-width: 480px) {
     .converter-actions {
         flex-direction: column;
@@ -184,30 +255,7 @@
     .format-select {
         justify-content: space-between;
     }
-}
-
-/* --- Mobile Breakpoint Adjustment Fixes --- */
-@media screen and (max-width: 768px) {
-    .upload-form {
-        padding: 20px !important;
-    }
-    
-    .upload-form .responsive-form-group {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 12px !important;
-        padding-bottom: 16px !important;
-    }
-    
-    .upload-form .responsive-form-group div {
-        max-width: 100% !important;
-    }
-    
-    .upload-form div[style*="justify-content: flex-end"] {
-        justify-content: center !important;
-    }
-    
-    .upload-form .btn-download {
-        width: 100% !important;
+    .logo {
+        font-size: 1.2rem;
     }
 }
