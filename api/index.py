@@ -1,7 +1,8 @@
+from email.mime import image
 import base64, io
 
 from flask import Flask, render_template, request, redirect, url_for, session
-from PIL import Image
+from PIL import Image, ImageEnhance
 import os
 
 
@@ -90,7 +91,7 @@ def compressor():
         img = Image.open(file.stream)
 
         buffer = io.BytesIO()
-        img.save(buffer, format=format.upper() if format in ['png', 'jpg', 'webp', 'avif'] else 'PNG', quality=int(quality), optimize=True)
+        img.save(buffer, format=format.upper() if format in ['png', 'jpg', 'webp', 'avif'] else 'PNG')
         b64_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
         
         # Data URL format jo HTML ka <img> tag samajhta hai
@@ -98,6 +99,47 @@ def compressor():
 
     return render_template('compressor.html', compressed_photo=encoded_image, user=user, username=username, email=email)
 
+
+@app.route('/enhance', methods=['GET', 'POST'])
+def enhance():
+    encoded_image = None
+
+    if request.method == 'POST':
+        file = request.files.get('image_file')
+        brightness = request.form.get('brightness')
+        contrast = request.form.get('contrast')
+        saturation = request.form.get('saturation')
+        sharpness = request.form.get('sharpness')
+        ext = file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else 'png'
+
+        # 1. Base Image Stream read karein
+        img = Image.open(file.stream)
+
+        # 2. Pura modification pipeline execute karke image object ko overwrite karein
+        img = ImageEnhance.Brightness(img).enhance(float(brightness) / 100)
+        img = ImageEnhance.Contrast(img).enhance(float(contrast) / 100)
+        img = ImageEnhance.Color(img).enhance(float(saturation) / 100)
+        img = ImageEnhance.Sharpness(img).enhance(float(sharpness) / 100)
+
+        # 3. Format control target set karein
+        save_format = 'JPEG' if ext in ['jpg', 'jpeg'] else 'PNG'
+        
+        # Cross-compatibility fix for alpha channel handling in JPEGs
+        if img.mode in ('RGBA', 'LA') and save_format == 'JPEG':
+            background = Image.new('RGB', img.size, (255, 255, 255))
+            background.paste(img, mask=img.split()[3])
+            img = background
+
+        # 4. Ab buffer stream allocation clear run karein
+        buffer = io.BytesIO()
+        
+        # FIX: Ab image pass karne ki jagah actual 'format' string dynamic update ho rahi hai
+        img.save(buffer, format=save_format, optimize=True)
+        
+        b64_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        encoded_image = f"data:image/{ext};base64,{b64_string}"
+
+    return render_template('enhance.html', processed_image=encoded_image)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

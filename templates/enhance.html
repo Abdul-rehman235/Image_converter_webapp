@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicCraft - AI Image Enhancer</title>
+    <link rel="stylesheet" href="/static/enhance.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Pic<span>Craft</span></a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span class="navicon"></span>
+            </label>
+
+            <nav class="nav-links">
+                <div class="menu-routing-links">
+                    <a href="/">Home</a>
+                    <a href="#" class="active">Tools</a>
+                    <a href="#">API</a>
+                    <a href="#">Pricing</a>
+                </div>
+                
+                <div class="nav-action-wrapper">
+                    {% if user %}
+                    <div class="profile-container">
+                        <button class="btn-profile" onclick="toggleProfileDropdown()">Profile</button>
+                        <div id="profileDropdownCard" class="profile-card-dropdown hidden">
+                            <div class="card-user-info">
+                                <p class="card-username">{{ username }}</p>
+                                <p class="card-email">{{ email }}</p>
+                            </div>
+                            <hr class="card-divider">
+                            <a href="/login" class="card-logout-btn">Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="nav-action-button">
+                        <button class="btn-get-started">Get Started</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="converter-section">
+            <h1 class="main-title">AI Image Enhancer</h1>
+            <p class="subtitle">Fine-tune details, brightness, saturation, and contrast properties dynamically.</p>
+
+            <form action="/enhance" method="POST" enctype="multipart/form-data" class="upload-container">
+
+                <div class="drop-zone">
+                    <div class="drop-zone-content">
+                        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        <input type="file" id="imageSelector" name="image_file" accept="image/*" required class="dropzone-file-input">
+                        <p class="dropzone-matrix-hint">Drag & drop files or click to browse</p>
+                    </div>
+                </div>
+
+                <div class="enhancer-dashboard-grid">
+                    <div class="control-panel">
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="brightness">Brightness</label>
+                                <span class="value-tag" id="brightness-val">100%</span>
+                            </div>
+                            <input type="range" id="brightness" name="brightness" min="0" max="200" value="100" class="range-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="contrast">Contrast</label>
+                                <span class="value-tag" id="contrast-val">100%</span>
+                            </div>
+                            <input type="range" id="contrast" name="contrast" min="0" max="200" value="100" class="range-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="saturation">Saturation</label>
+                                <span class="value-tag" id="saturation-val">100%</span>
+                            </div>
+                            <input type="range" id="saturation" name="saturation" min="0" max="200" value="100" class="range-slider">
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="sharpness">Sharpness</label>
+                                <span class="value-tag" id="sharpness-val">100%</span>
+                            </div>
+                            <input type="range" id="sharpness" name="sharpness" min="0" max="200" value="100" class="range-slider">
+                        </div>
+                    </div>
+
+                    <div class="preview-pane">
+                        <div class="empty-preview-text" id="previewPlaceholder">No image selected for live preview</div>
+                        <img src="{{ processed_image }}" id="localPreviewImg" class="hidden" alt="Live Preview Container">
+                    </div>
+
+                </div>
+
+                <div class="action-container-track">
+                    <button type="submit" class="btn-enhance">Enhance Image</button>
+                </div>
+
+            </form>
+        </section>
+
+        {% if processed_image %}
+        <section class="card responsive-row-card">
+            <div class="processed-preview-box">
+                <img src="{{ processed_image }}" alt="Enhanced Asset Output">
+            </div>
+
+            <div class="success-header">
+                <div class="success-icon">✓</div>
+                <div class="success-title-wrapper">
+                    <h2 class="success-title">Asset Enhanced Successfully!</h2>
+                    <p class="success-subtitle">AI optimization attributes are saved down to the pixel core structural index.</p>
+                </div>
+            </div>
+
+            <div class="download-actions">
+                <a href="{{ processed_image }}" download="enhanced_image" class="btn-download">
+                    Download Image
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <hr class="divider">
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 PicCraft. Powered by AZ.Studio.</p>
+    </footer>
+
+    <script src="/static/enhancer.js"></script>
+</body>
+</html>
