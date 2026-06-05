@@ -91,7 +91,7 @@ def compressor():
         img = Image.open(file.stream)
 
         buffer = io.BytesIO()
-        img.save(buffer, format=format.upper() if format in ['png', 'jpg', 'webp', 'avif'] else 'PNG')
+        img.save(buffer, format=format.upper() if format in ['png', 'jpg', 'webp', 'avif'] else 'PNG', quality=int(quality), optimize=True)
         b64_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
         
         # Data URL format jo HTML ka <img> tag samajhta hai
