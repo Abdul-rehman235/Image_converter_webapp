@@ -53,62 +53,78 @@
         </div>
     </header>
     
-    <main class="dashboard-container" style="max-width: 780px; margin: 50px auto; padding: 0 20px;">
+    <main class="dashboard-container">
         
-        <section class="converter-section" style="margin-bottom: 35px; text-align: left;">
-            <h1 class="main-title" style="color: #ffffff; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.8px; margin: 0 0 8px 0; line-height: 1.15;">Size Compressor</h1>
-            <p class="subtitle" style="color: #94a3b8; font-size: 1rem; font-weight: 400; line-height: 1.5; margin: 0; max-width: 600px;">Reduce image weight instantly while ensuring optimal matrix resolution and high fidelity balancing.</p>
+        <section class="converter-section">
+            <h1 class="main-title">Size Compressor</h1>
+            <p class="subtitle">Reduce asset payloads instantly with optimized matrix balance and raw performance scaling.</p>
         </section>
 
-        <form action="/compressor" method="POST" enctype="multipart/form-data" class="upload-form" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);">
+        <form action="/compressor" method="POST" enctype="multipart/form-data" class="upload-form">
             
-            <div class="responsive-form-group" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 18px; margin-bottom: 18px;">
-                <label for="quality" style="color: #1e293b; font-weight: 600; font-size: 0.92rem; white-space: nowrap;">Target Quality Level:</label>
+            <div class="responsive-form-group">
+                <div class="input-label-wrapper">
+                    <label for="quality">Target Quality Level</label>
+                    <span class="input-hint">Balance size ratio optimization</span>
+                </div>
                 
-                <div class="range-wrapper" style="display: flex; align-items: center; gap: 12px; width: 100%; max-width: 280px; background: #f8fafc; padding: 8px 14px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <div class="range-wrapper">
                     <input type="range" id="quality" name="quality" min="10" max="90" value="70" 
-                           oninput="this.nextElementSibling.value = this.value + '%'"
-                           style="flex-grow: 1; accent-color: #10b981; cursor: pointer; height: 6px;">
-                    <output style="color: #0f172a; font-weight: 700; font-size: 0.88rem; min-width: 35px; text-align: right;">70%</output>
+                           oninput="this.nextElementSibling.value = this.value + '%'">
+                    <output>70%</output>
                 </div>
             </div>
 
-        
+            <div class="responsive-form-group">
+                <div class="input-label-wrapper">
+                    <label for="format">Convert to</label>
+                    <span class="input-hint">Target extension matrix layer</span>
+                </div>
                 
-            <div class="dropzone-container" style="position: relative; margin-bottom: 24px; border: 2px dashed #cbd5e1; padding: 35px 20px; border-radius: 12px; text-align: center; background: #f8fafc; transition: all 0.2s ease;">
-                <div style="color: #10b981; margin-bottom: 12px;">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block;">
+                <div class="input-field-container">
+                    <div class="input-icon-node">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M16 16l4-4-4-4M8 8l-4 4 4 4M14 4l-4 16"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="format" name="format" placeholder="e.g. png, jpg, webp, avif" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="dropzone-container">
+                <div class="dropzone-icon-wrapper">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
                     </svg>
                 </div>
-                <input type="file" name="my_photo" required style="color: #475569; font-size: 0.9rem; font-weight: 500; cursor: pointer; max-width: 250px;">
-                <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 8px; margin-bottom: 0;">Compatibility Matrix: JPEG, PNG, or WebP up to 10MB</p>
+                <input type="file" name="my_photo" required class="dropzone-file-input">
+                <p class="dropzone-matrix-text">Compatibility Matrix: JPEG, PNG, or WebP up to 10MB</p>
             </div>
 
-            <div class="submit-wrapper" style="display: flex; justify-content: flex-end;">
-                <button type="submit" class="btn-download" style="padding: 11px 26px; font-size: 0.9rem; border-radius: 8px; border: none; width: auto; min-width: 160px; cursor: pointer;">
+            <div class="submit-wrapper">
+                <button type="submit" class="btn-submit-action">
                     Compress Asset
                 </button>
             </div>
         </form>
 
         {% if compressed_photo %}
-        <section class="card download-card responsive-row-card" style="background: #ffffff; color: #1e293b; border-radius: 12px; padding: 12px 20px; border: 1px solid #e2e8f0; margin-top: 25px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: all 0.2s ease;">
+        <section class="card download-card responsive-row-card">
             
-            <div class="preview-box" style="border: 1px solid #f1f5f9; border-radius: 8px; padding: 4px; background: #f8fafc; display: flex; justify-content: center; align-items: center; width: 64px; height: 64px; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);">
-                <img src="{{ compressed_photo }}" alt="Compressed Output" class="preview-img" style="max-width: 100%; max-height: 100%; border-radius: 4px; object-fit: contain;">
+            <div class="preview-box">
+                <img src="{{ compressed_photo }}" alt="Compressed Output" class="preview-img">
             </div>
         
-            <div class="success-header" style="display: flex; align-items: center; gap: 12px; flex-grow: 1;">
-                <div class="success-icon" style="background-color: #d1fae5; color: #059669; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">✓</div>
-                <div class="success-title-wrapper" style="text-align: left;">
-                    <h2 class="success-title" style="font-size: 1.05rem; font-weight: 700; color: #0f172a; margin: 0; letter-spacing: -0.2px; line-height: 1.2;">Compression Complete!</h2>
-                    <p class="success-subtitle" style="color: #64748b; font-size: 0.85rem; margin: 2px 0 0 0; line-height: 1.3;">Payload sizes successfully balanced and optimized for fast production.</p>
+            <div class="success-header">
+                <div class="success-icon">✓</div>
+                <div class="success-title-wrapper">
+                    <h2 class="success-title">Compression Complete!</h2>
+                    <p class="success-subtitle">Payload sizes successfully balanced and optimized for fast production rendering.</p>
                 </div>
             </div>
         
-            <div class="download-actions" style="display: flex; flex-shrink: 0;">
-                <a href="{{ compressed_photo }}" download="compressed_image" class="btn-download" style="text-decoration: none; background-color: #10b981; color: #ffffff; text-align: center; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 0.88rem; white-space: nowrap; border: 1px solid #059669; cursor: pointer; display: inline-block; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15); transition: all 0.2s ease;">
+            <div class="download-actions">
+                <a href="{{ compressed_photo }}" download="compressed_image" class="btn-download-trigger">
                     Download Asset
                 </a>
             </div>

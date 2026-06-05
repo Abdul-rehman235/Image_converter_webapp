@@ -1,24 +1,41 @@
 /* ==========================================================================
-   🧱 GLOBAL CONFIGURATIONS & ROOT SYSTEM
+   🧱 GLOBAL CORE SYSTEM VARS (BRIGHT PREMIUM MODERN PALETTE)
    ========================================================================== */
 :root {
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --card-bg: #ffffff;
-    --accent: #007bff; /* ConvertCraft Neon Emerald */
-    --brand-blue: #007BFF;
+    --bg-main: #f8fafc;        /* Off-white fluid dynamic app canvas bg */
+    --card-bg: #ffffff;        /* Pure white bento floating cards */
+    --text-main: #0f172a;      /* Bold dark charcoal body typography */
+    --text-muted: #64748b;     /* Muted slate information sub-texts */
+    --border-color: #e2e8f0;   /* Clean silver borders hairline width */
+    --accent-glow: #2563eb;    /* Precision Emerald Green highlight anchors */
+    --brand-blue: #007bff;     /* Primary Core Interaction Cues */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
-   🧭 NAVBAR / HEADER LAYOUT (FULLY RESPONSIVE)
+   🧭 FLOATING TOP NAVIGATION ARCHITECTURE
    ========================================================================== */
 .navbar {
     position: sticky;
     top: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
     z-index: 100;
 }
@@ -34,14 +51,14 @@
 
 .logo {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 800;
     text-decoration: none;
     color: var(--text-main);
-    letter-spacing: -0.5px;
+    letter-spacing: -0.8px;
 }
 
 .logo span {
-    color: var(--accent);
+    color: var(--accent-glow);
 }
 
 .nav-links {
@@ -54,6 +71,7 @@
     color: var(--text-muted);
     font-weight: 500;
     margin: 0 1.2rem;
+    font-size: 0.95rem;
     transition: color 0.2s ease;
 }
 
@@ -62,92 +80,183 @@
 }
 
 /* ==========================================================================
-   🔘 BUTTONS SYSTEM
+   🔘 CONTROL CORE INTERACTION ANCHORS
    ========================================================================== */
 .btn-primary {
-    background-color: #007BFF;
-    color: #000000;
+    background-color: var(--brand-blue);
+    color: #ffffff;
     border: none;
-    padding: 0.6rem 1.2rem;
-    font-weight: 500;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+    transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: var(--brand-blue);
-    color: #000000;
+    background-color: #0056b3;
+    transform: translateY(-1px);
 }
 
-/* Profile Dropdown Parent Wrapper */
-.profile-container {
-    position: relative;
-    display: inline-block;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Profile Trigger Controller */
 .btn-profile {
-    background: var(--brand-blue);
-    color: #000000; /* White text on blue looks highly professional */
-    border: none;
+    background: #ffffff;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
     padding: 8px 18px;
     font-size: 14px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.2s;
 }
 
 .btn-profile:hover {
-    opacity: 0.9;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
-/* --- Converter Section --- */
-.converter-section {
-    text-align: center;
-    padding: 60px 0 40px 0;
+.profile-container {
+    position: relative;
+    display: inline-block;
 }
 
-/* --- Modern Format Input Group Wrapper --- */
-.format-select-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    border-bottom: 1px solid #f1f5f9;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+.profile-card-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 230px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    z-index: 1000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.card-username { color: var(--text-main); font-weight: 700; margin-bottom: 2px; font-size: 0.92rem; text-align: left; }
+.card-email { color: var(--text-muted); font-size: 0.82rem; margin: 0; text-align: left; }
+.card-divider { border: 0; border-top: 1px solid var(--border-color); margin: 12px 0; }
+.card-logout-btn { color: #ef4444; text-decoration: none; font-size: 0.88rem; font-weight: 600; display: block; text-align: left; }
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   🏛️ DASHBOARD BASE PLATFORM FRAME WORKSPACE
+   ========================================================================== */
+.dashboard-container {
+    max-width: 820px;
+    margin: 50px auto;
+    padding: 0 24px;
+    flex-grow: 1;
     width: 100%;
 }
 
-/* --- Label Typography Layout --- */
+.converter-section {
+    text-align: left;
+    margin-bottom: 35px;
+}
+
+.main-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0 0 6px 0;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ==========================================================================
+   🗜️ CORE FLUID COMPRESSION CONSOLE FORM INTERFACES
+   ========================================================================== */
+.upload-form {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.responsive-form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+}
+
 .input-label-wrapper {
     display: flex;
     flex-direction: column;
     text-align: left;
+    flex-shrink: 0;
 }
 
 .input-label-wrapper label {
-    color: #1e293b;
+    color: var(--text-main);
     font-weight: 600;
-    font-size: 0.95rem;
-    margin: 0;
-    letter-spacing: -0.2px;
+    font-size: 0.98rem;
 }
 
 .input-label-wrapper .input-hint {
-    color: #94a3b8;
-    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
     margin-top: 2px;
-    font-weight: 400;
 }
 
-/* --- Input Field Interactive Box Architecture --- */
+/* Slider Node Settings */
+.range-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+    background: #f8fafc;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.range-wrapper input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 4px;
+    outline: none;
+    flex-grow: 1;
+    height: 6px;
+}
+
+.range-wrapper input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.range-wrapper output {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 0.9rem;
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Redesigned Text Field Format Layer Container */
 .input-field-container {
     position: relative;
     width: 100%;
@@ -156,242 +265,281 @@
     align-items: center;
 }
 
-/* Left side contextual indicator SVG icon */
 .input-icon-node {
     position: absolute;
     left: 14px;
     color: #94a3b8;
     display: flex;
     align-items: center;
-    justify-content: center;
     pointer-events: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
 }
 
-/* Premium Text Field Core Canvas */
 .input-field-container input[type="text"] {
     width: 100%;
-    padding: 11px 16px 11px 42px; /* Extra left padding to safely clear the vector icon */
-    font-size: 0.9rem;
+    padding: 11px 16px 11px 40px;
+    font-size: 0.92rem;
     font-weight: 500;
-    color: #0f172a;
+    color: var(--text-main);
     background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     outline: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
+    transition: all 0.2s ease;
 }
 
-/* --- Interactive Reactive States --- */
 .input-field-container input[type="text"]::placeholder {
     color: #cbd5e1;
-    font-weight: 400;
 }
 
-/* Hover State */
-.input-field-container input[type="text"]:hover {
-    border-color: #cbd5e1;
-    background-color: #f1f5f9;
-}
-
-/* Ultra Smooth Green Glow Focus State */
 .input-field-container input[type="text"]:focus {
-    border-color: #10b981;
+    border-color: var(--accent-glow);
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
 }
 
-/* Shift icon color contextually when user selects the box */
-.input-field-container input[type="text"]:focus ~ .input-icon-node,
-.input-field-container:focus-within .input-icon-node {
-    color: #10b981;
+.input-field-container input[type="text"]:focus ~ .input-icon-node {
+    color: var(--accent-glow);
 }
 
 /* ==========================================================================
-   📱 MOBILE OVERRIDE BREAKPOINT (STAYS 100% RESPONSIVE)
+   📂 DRAG AND DROP ZONE INTERFACES
+   ========================================================================== */
+.dropzone-container {
+    position: relative;
+    margin-bottom: 24px;
+    border: 2px dashed #cbd5e1;
+    padding: 45px 20px;
+    border-radius: 12px;
+    text-align: center;
+    background: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.dropzone-container:hover {
+    border-color: var(--accent-glow);
+    background: rgba(16, 185, 129, 0.01);
+}
+
+.dropzone-icon-wrapper {
+    color: var(--accent-glow);
+    margin-bottom: 12px;
+}
+
+.dropzone-file-input {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.dropzone-matrix-text {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+/* Bottom Execution Launcher Trigger */
+.submit-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit-action {
+    background-color: var(--text-main);
+    color: #ffffff;
+    padding: 12px 32px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    min-width: 160px;
+    transition: all 0.2s ease;
+}
+
+.btn-submit-action:hover {
+    background-color: #1e293b;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+/* ==========================================================================
+   🎉 PROCESSING COMPLETE OUTPUT DOWNLOAD CONSOLES
+   ========================================================================== */
+.responsive-row-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px 24px;
+    margin-top: 25px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.preview-box {
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 4px;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+.success-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-grow: 1;
+}
+
+.success-icon {
+    background-color: #d1fae5;
+    color: #059669;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.success-title-wrapper {
+    text-align: left;
+}
+
+.success-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.success-subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 3px 0 0 0;
+    line-height: 1.4;
+}
+
+.btn-download-trigger {
+    text-decoration: none;
+    background-color: var(--accent-glow);
+    color: #ffffff;
+    padding: 11px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    transition: all 0.2s ease;
+}
+
+.btn-download-trigger:hover {
+    background-color: #059669;
+}
+
+.main-footer {
+    padding: 30px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 60px;
+    background: #ffffff;
+}
+
+/* ==========================================================================
+   📱 📱 INTENSE MEDIA QUERY OVERRIDES (100% BULLETPROOF RESPONSIVENESS)
    ========================================================================== */
 @media screen and (max-width: 768px) {
-    .format-select-group {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 12px !important;
-        padding-bottom: 16px !important;
+    .nav-container {
+        padding: 1rem 1.2rem;
+    }
+    
+    .nav-links a:not(.btn-profile):not(.btn-primary) {
+        display: none; /* Hide secondary standard links on viewport collapse */
     }
 
+    .dashboard-container {
+        padding: 0 16px;
+        margin: 30px auto;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .upload-form {
+        padding: 24px 16px;
+    }
+    
+    /* Strict layout shift from horizontal grid to clean vertical stack blocks */
+    .responsive-form-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 18px;
+    }
+    
+    .range-wrapper, 
     .input-field-container {
         width: 100% !important;
         max-width: 100% !important;
     }
-}
-
-.main-title {
-    text-align: center;
-    font-size: 2.7rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-.subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-
-
-/* Small Dropdown Context Window */
-.profile-card-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    width: 220px;
-    background: #141416;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    padding: 14px;
-    box-sizing: border-box;
-}
-
-.card-user-info {
-    margin-bottom: 4px;
-}
-
-.card-username {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0 0 4px 0;
-}
-
-.card-email {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 12px;
-    margin: 0;
-    word-break: break-all;
-}
-
-/* ==========================================================================
-   🗜️ FORMS & RANGE INPUT SLIDER ELEMENTS
-   ========================================================================== */
-.responsive-form-group input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #e2e8f0;
-    border-radius: 4px;
-    outline: none;
-    width: 100%;
-}
-
-/* .responsive-form-group input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16 height: 16px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 1px 4px rgba(16, 185, 129, 0.4);
-} */
-
-/* ==========================================================================
-   🏛️ FOOTER BLOCK
-   ========================================================================== */
-.main-footer {
-    background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
-    padding: 25px 0;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: auto;
-}
-
-/* ==========================================================================
-   📱 📱 CORE MEDIA QUERIES BREAKPOINTS (TABLET & MOBILE)
-   ========================================================================== */
-
-@media screen and (max-width: 768px) {
-    /* 1. Header Break System */
-    .nav-container {
-        padding: 1rem;
-    }
-    .nav-links a:not(.btn-profile):not(.btn-primary) {
-        display: none; /* Hide normal links to save tight spaces */
-    }
-
-    /* 2. Container Canvas Control */
-    .dashboard-container {
-        padding: 0 15px !important;
-    }
-
-    /* 3. Core Form Console Formats */
-    .upload-form {
-        padding: 20px !important;
+    
+    .submit-wrapper {
+        justify-content: center;
+        width: 100%;
     }
     
-    .upload-form .responsive-form-group {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 10px !important;
-        padding-bottom: 12px !important;
-    }
-    
-    /* Input adjustments for elements inside row */
-    .upload-form .responsive-form-group div,
-    .upload-form .responsive-form-group input,
-    .upload-form .responsive-form-group select {
+    .btn-submit-action {
         width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    /* Button Center Fix */
-    .upload-form div[style*="justify-content: flex-end"] {
-        justify-content: center !important;
-    }
-    
-    .upload-form .btn-download {
-        width: 100% !important;
+        text-align: center;
     }
 
-    /* 4. Downloader Card Logic Stack */
+    /* Output Section Responsive Wrap */
     .responsive-row-card {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        padding: 20px 16px !important;
-        gap: 16px !important;
-    }
-    
-    .responsive-row-card .success-header {
-        flex-direction: column !important;
-        gap: 8px !important;
-    }
-    
-    .responsive-row-card .success-title-wrapper {
-        text-align: center !important;
-    }
-
-    .responsive-row-card .download-actions, 
-    .responsive-row-card .btn-download {
-        width: 100% !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .converter-actions {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        text-align: center;
+        padding: 24px 16px;
+        gap: 18px;
     }
-    .format-select {
-        justify-content: space-between;
+    
+    .success-header {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
     }
-    .logo {
-        font-size: 1.2rem;
+    
+    .success-title-wrapper {
+        text-align: center;
+    }
+
+    .download-actions, 
+    .btn-download-trigger {
+        width: 100% !important;
+        text-align: center;
+        box-sizing: border-box;
     }
 }

@@ -85,7 +85,7 @@ def compressor():
     if request.method == 'POST':
         quality = request.form.get('quality')
         file = request.files.get('my_photo')
-        format = file.filename.split('.')[-1].lower()
+        format = request.form.get('format')
 
         img = Image.open(file.stream)
 
