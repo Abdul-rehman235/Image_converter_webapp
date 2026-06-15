@@ -13,8 +13,8 @@ app = Flask(__name__,
             template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates')),
             static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../static')))
 
-url: str = "https://zunuouduhjhivltyqucw.supabase.co"
-key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1bnVvdWR1aGpoaXZsdHlxdWN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NDA0NDksImV4cCI6MjA5NTIxNjQ0OX0.QirilmyoN7Uol0LJRc0Q2JNMa5r82AceBoAMkzIYQ3c"
+url: str = os.getenv("URL")
+key: str = os.getenv("KEY")
 supabase: Client = create_client(url, key)
 
 
