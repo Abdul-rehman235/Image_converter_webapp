@@ -6,7 +6,7 @@ from PIL import Image, ImageEnhance
 import os
 
 
-
+# start routing
 # Flask ko batana ke templates aur static folders bahar root par hain
 app = Flask(__name__, 
             template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates')),
