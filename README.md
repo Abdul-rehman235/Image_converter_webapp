@@ -28,11 +28,7 @@ pip install -r requirements.txt
 python app.py
 
 ## Live Demo
-Vercel Link
-
-## Screenshots
-
-(Add screenshots)
+Link: https://picture-craft.vercel.app/
 
 ## Author
 
